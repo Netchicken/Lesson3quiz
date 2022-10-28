@@ -1,17 +1,12 @@
 import "../App.css";
-
 import React, { useState, useEffect, useRef } from "react";
 import Select from "react-select"; //for my select dropdown
 import "bootstrap/dist/css/bootstrap.min.css"; //leatest v5
 import Section from "./Section"; //shows country info
 import Footer from "./Footer"; //shows country info
-
 import Results from "./ResultsPage"; //shows the results
 import { GetRandomNumber, alertItemName } from "../Operations/AllOperations";
-//
-//import { countryData, createCities } from "../Assets/cities"; //datalist of countries
-import {quiz} from "../Assets/quiz";
-import {  maoriPlaceNamesData,  createMaoriPlacenames,} from "../Assets/maoriPlaceNames"; //datalist of MaoriPlacenames
+import quiz from "../Assets/quiz";
 
 const CityGame = () => {
   const [allData, setAllData] = useState(quiz); //all the data of the countries
@@ -22,31 +17,51 @@ const CityGame = () => {
     A: "Start",
   });
   let selectedCity;
-  
+
   const [number, setNumber] = useState(0); //random number
   const [citiesCorrect, setCitiesCorrect] = useState([]);
   const [citiesWrong, setCitiesWrong] = useState([]);
-  //const [toggleTextIsHidden, setToggleTextIsHidden] = useState("true");
-  const [selectCityData, setSelectCityData] = useState(createMaoriPlacenames);
-
+  const [selectCityData, setSelectCityData] = useState();
+  const [allAnswers, setAllAnswers] = useState();
   //this run only at the initial stage, AFTER the dom has loaded ,[] at the end makes it run once
-  useEffect(() => {
-    const fetchData = () => {
-      setAllData(quiz);
-      setSelectCityData(createMaoriPlacenames);
-      console.log("useEffect allData ", quiz);
-      LoadGamedata();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     setAllData(quiz);
+  //     setSelectCityData();
+  //     console.log("useEffect allData ", quiz);
+  //     LoadGamedata();
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   fetchData();
+  // }, []);
 
   const onClickHandlerNewGame = () => {
-    console.log("onClickHandlerNewGame", "triggered");
+    //  console.log("onClickHandlerNewGame", "triggered");
     LoadGamedata();
 
-    console.log("onClickHandlerNewGame Random number", number);
-    console.log("onClickHandlerNewGame Selected Country Data", allData[number]);
+    //  console.log("onClickHandlerNewGame Random number", number);
+    //  console.log("onClickHandlerNewGame ", allData[number]);
+  };
+
+  const LoadGamedata = () => {
+    let length = allData.length;
+    setAllAnswers(allData.map((item) => item.A));
+    console.log("LoadGamedata length", length);
+    console.log(
+      "LoadGamedata alldata.A",
+      allData.map((item) => item.A)
+    );
+    let Rand = GetRandomNumber(length);
+    setNumber(Rand);
+
+    allData.map(() => {
+      var selecteditem = allData[number]; //get the data at that point
+      setGameData({
+        Q: selecteditem.Q,
+        A: selecteditem.A,
+      });
+      console.log("Selected item Q", selecteditem.Q + " " + selecteditem.A);
+    });
   };
 
   const CheckForWinnerLoser = () => {
@@ -85,29 +100,10 @@ const CityGame = () => {
     }
   };
 
-  //win lose toast message
-  // const showToastWithGravity = (msg) => {
-  //   ToastAndroid.showWithGravity(msg, ToastAndroid.LONG, ToastAndroid.CENTER);
-  // };
-
-  const LoadGamedata = () => {
-    let length = allData.length;
-    let Rand = GetRandomNumber(length);
-    setNumber(Rand);
-
-    allData.map((item, id) => {
-      var selecteditem = allData[number]; //get the data at that point
-      setGameData({
-        Q: selecteditem.Q,
-        A: selecteditem.A
-      });
-    });
-  };
-
   const handleCityChange = (e) => {
     console.log(" handleChange city Selected!!", e.value);
-        selectedCity = e.value;
-       CheckForWinnerLoser();
+    selectedCity = e.value;
+    CheckForWinnerLoser();
   };
   //for the dropdown select https://blog.logrocket.com/getting-started-with-react-select/
   const selectCustomStyles = {
@@ -121,7 +117,9 @@ const CityGame = () => {
   };
 
   const newplaceholder = () => {
-    return selectedCity ? "Select a place " + selectedCity : "Select a place";
+    return selectedCity
+      ? "Select an Answer " + selectedCity
+      : "Select an Answer";
   };
 
   return (
@@ -133,13 +131,13 @@ const CityGame = () => {
             className='buttonSubmit btn btn-default'
             onClick={onClickHandlerNewGame}
           >
-            Choose a random Place
+            Choose a random Question
           </button>
         </div>
         <div className='col-sm'>
-            <Select
+          <Select
             styles={selectCustomStyles}
-            options={selectCityData}
+            options={allAnswers}
             className='selectDropDownStyle'
             value={selectedCity}
             onChange={handleCityChange}
@@ -147,7 +145,7 @@ const CityGame = () => {
             controlShouldRenderValue={true}
           />
         </div>
-        
+
         <Results citiesCorrect={citiesCorrect} citiesWrong={citiesWrong} />
       </div>
 

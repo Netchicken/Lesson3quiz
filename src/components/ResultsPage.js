@@ -1,8 +1,7 @@
 const Results = (props) => {
   return (
     <div className='container'>
-      {/* <div className='headingoutome'>Results</div> */}
-      <div className='row'>
+       <div className='row'>
         <div className='resultcontainer'>
           <div className='col-sm'>
             <div className='appheadermeaningtext'>Correct</div>
