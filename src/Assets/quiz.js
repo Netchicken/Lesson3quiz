@@ -10,6 +10,16 @@ const options = [
 //https://stackoverflow.com/questions/43572436/sort-an-array-of-objects-in-react-and-render-them
 //getSelectDataList.sort((a, b) => (a.label > b.label ? 1 : -1));
 // const data = allData.flatMap((item) => item.CapitalName).sort();
+export const AnswerList = () => {
+  let selectDataList = [];
+
+  selectDataList = quizData.map((item, index) => ({
+    item: item.A,
+  }));
+
+  console.log("createQuizAnswers in quiz.js ", selectDataList);
+  return selectDataList;
+};
 
 export function createQuizAnswers() {
   var getSelectDataList = [{ value: "1", label: "answer" }];
@@ -17,7 +27,7 @@ export function createQuizAnswers() {
     value: item.A,
     label: item.A,
   }));
- // console.log("createQuizAnswers in quiz.js ", getSelectDataList);
+  // console.log("createQuizAnswers in quiz.js ", getSelectDataList);
   return getSelectDataList;
 }
 

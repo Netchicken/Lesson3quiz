@@ -6,7 +6,7 @@ import Section from "./Section"; //shows country info
 import Footer from "./Footer"; //shows country info
 import Results from "./ResultsPage"; //shows the results
 import { GetRandomNumber, alertItemName } from "../Operations/AllOperations";
-import { quizData, createQuizAnswers } from "../Assets/quiz";
+import { quizData, AnswerList } from "../Assets/quiz";
 
 const CityGame = () => {
   //  const [allData, setAllData] = useState(quiz); //all the data of the countries
@@ -26,7 +26,7 @@ const CityGame = () => {
   const [selectCityData, setSelectCityData] = useState();
   //const [allAnswers, setAllAnswers] = useState();
   const allData = quizData;
-  const answers = createQuizAnswers;
+  const [answerData, setAnswerData] = useState();
 
   const onClickHandlerNewGame = () => {
     //  console.log("onClickHandlerNewGame", "triggered");
@@ -35,13 +35,37 @@ const CityGame = () => {
     //  console.log("onClickHandlerNewGame Random number", number);
     //  console.log("onClickHandlerNewGame ", allData[number]);
   };
+  //https://stackoverflow.com/questions/71581036/map-data-in-react-to-array-of-objects
+  // function createQuizAnswers() {
+  //   var getSelectDataList = [{ value: "1", label: "answer" }];
+  //   getSelectDataList = allData.map((item) => ({
+  //     value: item.A,
+  //     label: item.A,
+  //   }));
+  //   return getSelectDataList;
+  // }
 
-  const LoadGamedata = () => {
+  const CreateSelectData = () => {
+    let selectDataList = [{ value: "1", label: "answer" }];
+
+    // AnswerList.map(
+    //   (city) =>
+    //     (getSelectDataList = [...selectData, { label: city, value: city }])
+    // );
+    console.log("CreateSelectData AnswerList", AnswerList);
+    AnswerList.map((item) => {
+      selectDataList = [...selectDataList, { value: item, label: item }];
+    });
+    setAnswerData([selectDataList]);
+  };
+
+  function LoadGamedata() {
     let length = allData.length;
+    CreateSelectData();
 
-    // setAllAnswers(answers);
     console.log("LoadGamedata length", length);
-    console.log("LoadGamedata createQuizAnswers", createQuizAnswers);
+
+    console.log("LoadGamedata answerData", answerData);
     let Rand = GetRandomNumber(length);
     setNumber(Rand);
 
@@ -53,7 +77,7 @@ const CityGame = () => {
       });
       console.log("Selected item Q A", selecteditem.Q + " " + selecteditem.A);
     });
-  };
+  }
 
   const CheckForWinnerLoser = () => {
     console.log("CheckForWinnerLoser gameData.CapitalName", gameData.Placename);
@@ -128,7 +152,7 @@ const CityGame = () => {
         <div className='col-sm'>
           <Select
             styles={selectCustomStyles}
-            options={answers}
+            options={answerData}
             className='selectDropDownStyle'
             value={selectedCity}
             onChange={handleCityChange}
