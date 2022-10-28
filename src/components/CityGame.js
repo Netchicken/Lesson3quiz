@@ -6,34 +6,27 @@ import Section from "./Section"; //shows country info
 import Footer from "./Footer"; //shows country info
 import Results from "./ResultsPage"; //shows the results
 import { GetRandomNumber, alertItemName } from "../Operations/AllOperations";
-import quiz from "../Assets/quiz";
+import { quizData, createQuizAnswers } from "../Assets/quiz";
 
 const CityGame = () => {
-  const [allData, setAllData] = useState(quiz); //all the data of the countries
+  //  const [allData, setAllData] = useState(quiz); //all the data of the countries
 
   const [gameData, setGameData] = useState({
     //for the game being currently played
     Q: "Start",
     A: "Start",
   });
+
+  const [answersData, setAnswersData] = useState([]);
   let selectedCity;
 
   const [number, setNumber] = useState(0); //random number
   const [citiesCorrect, setCitiesCorrect] = useState([]);
   const [citiesWrong, setCitiesWrong] = useState([]);
   const [selectCityData, setSelectCityData] = useState();
-  const [allAnswers, setAllAnswers] = useState();
-  //this run only at the initial stage, AFTER the dom has loaded ,[] at the end makes it run once
-  // useEffect(() => {
-  //   const fetchData = () => {
-  //     setAllData(quiz);
-  //     setSelectCityData();
-  //     console.log("useEffect allData ", quiz);
-  //     LoadGamedata();
-  //   };
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   fetchData();
-  // }, []);
+  //const [allAnswers, setAllAnswers] = useState();
+  const allData = quizData;
+  const answers = createQuizAnswers;
 
   const onClickHandlerNewGame = () => {
     //  console.log("onClickHandlerNewGame", "triggered");
@@ -45,12 +38,10 @@ const CityGame = () => {
 
   const LoadGamedata = () => {
     let length = allData.length;
-    setAllAnswers(allData.map((item) => item.A));
+
+    // setAllAnswers(answers);
     console.log("LoadGamedata length", length);
-    console.log(
-      "LoadGamedata alldata.A",
-      allData.map((item) => item.A)
-    );
+    console.log("LoadGamedata createQuizAnswers", createQuizAnswers);
     let Rand = GetRandomNumber(length);
     setNumber(Rand);
 
@@ -60,7 +51,7 @@ const CityGame = () => {
         Q: selecteditem.Q,
         A: selecteditem.A,
       });
-      console.log("Selected item Q", selecteditem.Q + " " + selecteditem.A);
+      console.log("Selected item Q A", selecteditem.Q + " " + selecteditem.A);
     });
   };
 
@@ -137,7 +128,7 @@ const CityGame = () => {
         <div className='col-sm'>
           <Select
             styles={selectCustomStyles}
-            options={allAnswers}
+            options={answers}
             className='selectDropDownStyle'
             value={selectedCity}
             onChange={handleCityChange}
