@@ -35,19 +35,13 @@ const CityGame = () => {
     //  console.log("onClickHandlerNewGame Random number", number);
     //  console.log("onClickHandlerNewGame ", allData[number]);
   };
-  //https://stackoverflow.com/questions/71581036/map-data-in-react-to-array-of-objects
-  // function createQuizAnswers() {
-  //   var getSelectDataList = [{ value: "1", label: "answer" }];
-  //   getSelectDataList = allData.map((item) => ({
-  //     value: item.A,
-  //     label: item.A,
-  //   }));
-  //   return getSelectDataList;
-  // }
 
   const CreateSelectData = () => {
     const list = allData.map((item) => ({ value: item.A, label: item.A }));
-    console.log("CreateSelectData list", list);
+    //  sort by String property ASCENDING (A - Z)
+    //const strAscending = [...employees].sort((a, b) => a.name > b.name ? 1 : -1,
+    const listSorted = [...list].sort((a, b) => (a.value > b.value ? 1 : -1));
+    console.log("CreateSelectData list", listSorted);
     setAnswerData(list);
   };
 
