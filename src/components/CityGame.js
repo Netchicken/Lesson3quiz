@@ -46,17 +46,9 @@ const CityGame = () => {
   // }
 
   const CreateSelectData = () => {
-    let selectDataList = [{ value: "1", label: "answer" }];
-
-    // AnswerList.map(
-    //   (city) =>
-    //     (getSelectDataList = [...selectData, { label: city, value: city }])
-    // );
-    console.log("CreateSelectData AnswerList", AnswerList);
-    AnswerList.map((item) => {
-      selectDataList = [...selectDataList, { value: item, label: item }];
-    });
-    setAnswerData([selectDataList]);
+    const list = allData.map((item) => ({ value: item.A, label: item.A }));
+    console.log("CreateSelectData list", list);
+    setAnswerData(list);
   };
 
   function LoadGamedata() {

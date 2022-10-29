@@ -13,7 +13,7 @@ const options = [
 export const AnswerList = () => {
   let selectDataList = [];
 
-  selectDataList = quizData.map((item, index) => ({
+  selectDataList = [quizData].map((item, index) => ({
     item: item.A,
   }));
 
