@@ -1,21 +1,16 @@
-.App {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+
+body {
+  margin: 0;
+  padding: 48px 0;
+  font-family: "Figtree", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  background-image: linear-gradient(45deg, rgb(5, 94, 5), #111);
+  min-height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.Qheader {
   min-height: 10vh;
   align-items: center;
   justify-content: center;
@@ -31,14 +26,7 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 /* @media only screen and (max-width: 600px) { */
 .title {
   margin-top: 10px;
@@ -51,15 +39,6 @@
   text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
   margin-left: 0px;
   text-align: center;
-}
-/* } */
-
-/* body {
-   background-color: rgb(226, 230, 215);
-} */
-
-.App-link {
-  color: #2112f0;
 }
 
 .buttonSubmit {
@@ -91,9 +70,7 @@
   transform: translateY(7px);
 }
 
-/* .conditions {
-  color: rgb(185, 8, 176);
-} */
+
 .cardBody {
   border-radius: 18px;
   width: auto;

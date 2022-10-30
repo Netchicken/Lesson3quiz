@@ -2,7 +2,7 @@ import "../App.css";
 import React, { useState } from "react";
 import Select from "react-select"; //for my select dropdown
 import "bootstrap/dist/css/bootstrap.min.css"; //leatest v5
-import QHeader from "./QHeader"; //shows country info
+import Header from "./Header"; //shows country info
 import Footer from "./Footer"; //shows country info
 import Results from "./ResultsPage"; //shows the results
 import { GetRandomNumber, alertItemName } from "../Operations/AllOperations";
@@ -113,7 +113,7 @@ const Game = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <QHeader className='sectionTitle' props={gameData} />
+        <Header className='sectionTitle' props={gameData} />
         <div className='col-sm d-flex justify-content-center'>
           <button
             className='buttonSubmit btn btn-default'
