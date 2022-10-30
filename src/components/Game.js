@@ -48,17 +48,17 @@ const Game = () => {
     console.log("LoadGamedata length", length);
 
     console.log("LoadGamedata answerData", answerData);
-    let Rand = GetRandomNumber(length);
-    setNumber(Rand);
-
-    allData.map(() => {
-      var selecteditem = allData[number]; //get the data at that point
-      setGameData({
-        Q: selecteditem.Q,
-        A: selecteditem.A,
-      });
-      console.log("Selected item Q A", selecteditem.Q + " " + selecteditem.A);
-    });
+    let rand = GetRandomNumber(length);
+    setNumber(rand);
+    setGameData({ Q: allData[rand].Q, A: allData[rand].A });
+    // allData.map(() => {
+    //   var selecteditem = allData[number]; //get the data at that point
+    //   setGameData({
+    //     Q: selecteditem.Q,
+    //     A: selecteditem.A,
+    //   });
+    //   console.log("Selected item Q A", selecteditem.Q + " " + selecteditem.A);
+    // });
   }
 
   const CheckForWinnerLoser = () => {
@@ -70,7 +70,7 @@ const Game = () => {
     if (answer != null && gameData.A !== null) {
       if (answer === gameData.A) {
         alertItemName("Yes! You win! The answer is " + answer);
-        
+
         setAnswerCorrect((answersCorrect) => [
           ...answersCorrect,
           answer + " is " + gameData.Q,
