@@ -4,14 +4,14 @@ import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"; //from reactstrap
 import { AppHeader } from "./components/AppHeader";
-import CityGame from "./components/CityGame";
+import Game from "./components/Game";
 import "./App.css";
 
 
 ReactDOM.render(
   <Router>
     <AppHeader />
-    <CityGame />
+    <Game />
   </Router>,
   document.getElementById("root")
 );

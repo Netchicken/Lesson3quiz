@@ -1,32 +1,28 @@
 import "../App.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Select from "react-select"; //for my select dropdown
 import "bootstrap/dist/css/bootstrap.min.css"; //leatest v5
-import Section from "./Section"; //shows country info
+import QHeader from "./QHeader"; //shows country info
 import Footer from "./Footer"; //shows country info
 import Results from "./ResultsPage"; //shows the results
 import { GetRandomNumber, alertItemName } from "../Operations/AllOperations";
-import { quizData, AnswerList } from "../Assets/quiz";
+import { quizData } from "../Assets/quiz";
 
-const CityGame = () => {
-  //  const [allData, setAllData] = useState(quiz); //all the data of the countries
-
+const Game = () => {
   const [gameData, setGameData] = useState({
     //for the game being currently played
     Q: "Start",
     A: "Start",
   });
 
-  const [answersData, setAnswersData] = useState([]);
-  let answer;
+  //const [answersData, setAnswersData] = useState([]);
 
   const [number, setNumber] = useState(0); //random number
-  const [citiesCorrect, setCitiesCorrect] = useState([]);
-  const [citiesWrong, setCitiesWrong] = useState([]);
-  //const [selectCityData, setSelectCityData] = useState();
-  //const [allAnswers, setAllAnswers] = useState();
-  const allData = quizData;
+  const [answerCorrect, setAnswerCorrect] = useState([]);
+  const [answerWrong, setAnswerWrong] = useState([]);
   const [answerData, setAnswerData] = useState();
+  const allData = quizData;
+  let answer;
 
   const onClickHandlerNewGame = () => {
     //  console.log("onClickHandlerNewGame", "triggered");
@@ -42,7 +38,7 @@ const CityGame = () => {
     //const strAscending = [...employees].sort((a, b) => a.name > b.name ? 1 : -1,
     const listSorted = [...list].sort((a, b) => (a.value > b.value ? 1 : -1));
     console.log("CreateSelectData list", listSorted);
-    setAnswerData(list);
+    setAnswerData(listSorted);
   };
 
   function LoadGamedata() {
@@ -69,7 +65,7 @@ const CityGame = () => {
     console.log("CheckForWinnerLoser gameData.CapitalName", gameData.Q);
     //setToggleTextIsHidden("true"); //hide the text
 
-    console.log("CheckForWinnerLoser selectedCity", answer);
+    console.log("CheckForWinnerLoser selectedanswer", answer);
 
     if (answer != null && gameData.A !== null) {
       if (answer === gameData.A) {
@@ -79,15 +75,15 @@ const CityGame = () => {
           <a href={"https://www.google.com/search?q=+" + answer}>Google It!</a>
         );
 
-        setCitiesCorrect((citiesCorrect) => [
-          ...citiesCorrect,
+        setAnswerCorrect((answersCorrect) => [
+          ...answersCorrect,
           answer + " is " + gameData.Q,
         ]);
       } else {
         alertItemName("Sorry. The answer is not " + answer + ". Try again");
-        // pass in the citiesWrong state, spread it,  and pass both to setCitiesWrong
-        setCitiesWrong((citiesWrong) => [
-          ...citiesWrong,
+        // pass inanswer state, spread it,  and pass both to setCitiesWrong
+        setAnswerWrong((answerWrong) => [
+          ...answerWrong,
           answer + " is not " + gameData.Q,
         ]);
       }
@@ -117,7 +113,7 @@ const CityGame = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <Section className='sectionTitle' props={gameData} />
+        <QHeader className='sectionTitle' props={gameData} />
         <div className='col-sm d-flex justify-content-center'>
           <button
             className='buttonSubmit btn btn-default'
@@ -138,7 +134,7 @@ const CityGame = () => {
           />
         </div>
 
-        <Results citiesCorrect={citiesCorrect} citiesWrong={citiesWrong} />
+        <Results answerCorrect={answerCorrect} answerWrong={answerWrong} />
       </div>
 
       <Footer props={gameData} />
@@ -147,4 +143,4 @@ const CityGame = () => {
   // }
 };
 
-export default CityGame;
+export default Game;

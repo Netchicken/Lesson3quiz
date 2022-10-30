@@ -1,4 +1,4 @@
-const Section = ({ props }) => {
+const QHeader = ({ props }) => {
   return (
     <div>
       <div className='row'>
@@ -7,4 +7,4 @@ const Section = ({ props }) => {
     </div>
   );
 };
-export default Section;
+export default QHeader;

@@ -1,21 +1,21 @@
 const Results = (props) => {
   return (
     <div className='container'>
-       <div className='row'>
+      <div className='row'>
         <div className='resultcontainer'>
           <div className='col-sm'>
             <div className='appheadermeaningtext'>Correct</div>
-            {props.citiesCorrect.reverse().map((item) => {
+            {props.answerCorrect.reverse().map((item) => {
               return (
                 <div className='cardBody' key={item}>
-                  {item} 
+                  {item}
                 </div>
               );
             })}
           </div>
           <div className='col-sm'>
             <div className='appheadermeaningtext'>Incorrect</div>
-            {props.citiesWrong.reverse().map((item) => {
+            {props.answerWrong.reverse().map((item) => {
               return (
                 <div key={item} className='cardBody'>
                   {item}
