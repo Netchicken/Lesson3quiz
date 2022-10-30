@@ -70,11 +70,7 @@ const Game = () => {
     if (answer != null && gameData.A !== null) {
       if (answer === gameData.A) {
         alertItemName("Yes! You win! The answer is " + answer);
-
-        let url = (
-          <a href={"https://www.google.com/search?q=+" + answer}>Google It!</a>
-        );
-
+        
         setAnswerCorrect((answersCorrect) => [
           ...answersCorrect,
           answer + " is " + gameData.Q,

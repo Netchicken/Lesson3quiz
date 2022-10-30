@@ -1,14 +1,12 @@
-
 body {
   margin: 0;
-  padding: 48px 0;
+  /* padding: 48px 0; */
   font-family: "Figtree", sans-serif;
   font-size: 1.2rem;
   line-height: 1.6rem;
   background-image: linear-gradient(45deg, rgb(5, 94, 5), #111);
   min-height: 100vh;
 }
-
 
 .Qheader {
   min-height: 10vh;
@@ -25,7 +23,6 @@ body {
 .App-link {
   color: #61dafb;
 }
-
 
 /* @media only screen and (max-width: 600px) { */
 .title {
@@ -70,7 +67,6 @@ body {
   transform: translateY(7px);
 }
 
-
 .cardBody {
   border-radius: 18px;
   width: auto;
@@ -86,16 +82,16 @@ body {
   margin-top: 1em;
   margin-left: 1em;
   /* min-height: 100px; */
-  box-shadow: 3px 3px rgb(37, 150, 195), -1em 0 0.4em rgb(170, 175, 224);
+  box-shadow: 0.5em 0.5em 0.5em rgb(170, 175, 224);
 }
 
 .cardBody:hover {
   background-color: #ffffff;
-  box-shadow: 3px 3px red, -1em 0 0.4em olive;
+  /* box-shadow: 3px 3px red, -1em 0 0.4em olive; */
   transform: translateY(-7px);
 }
 
-.joketext {
+/* .joketext {
   margin-top: 20px;
   font: bold 20px arial, sans-serif;
   color: rgb(230, 220, 220);
@@ -104,7 +100,9 @@ body {
     0px 3px 0px #444, 0px 2px 0px #444, 0px 1px 0px #444;
   text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
   margin-left: 10px;
-}
+} */
+
+/*
 .stopoverflow {
   word-wrap: break-word;
 }
@@ -116,28 +114,24 @@ body {
   font-size: 24;
   font-weight: 600;
 }
-.sectionDescription {
+ .sectionDescription {
   margin-top: 8;
   font-size: 18;
   font-weight: 400;
-}
+} */
 .resultcontainer {
-  /* background-color: "#7CA1B4"; */
-  /* display: flex; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* flex-direction: row; */
   text-align: center;
-  /* font-size: 20px; */
   font-weight: bold;
   color: #1b1c1f;
 }
-.headingoutome {
+/* .headingoutome {
   font-size: 16px;
   font-weight: bold;
   color: #1b1c1f;
   text-align: center;
-}
+} */
 .selectDropDownStyle {
   font-size: 0.9em;
   font-family: "Roboto", sans-serif;
@@ -147,33 +141,33 @@ body {
   padding: 0;
 }
 
-.appheadercontainer {
-  /* background-color: #7CA1B4; */
+/* .appheadercontainer {
+ 
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
-  /* text-align: left; */
+ 
   font-size: 0.8em;
-  /* font-weight: bolder; */
+  
   color: #1b1c1f;
-}
-.appheadercitytext {
-  /* background-color: #7CA1B4; */
+} */
+/* .appheadercitytext {
+ 
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
   text-align: center;
   font-size: 0.9em;
-  /* font-weight: bold; */
+  
   color: #1b1c1f;
-}
-
+} 
+*/
 .appheadermeaningtext {
+  margin-top: 10px;
   text-align: center;
   font-size: 1.2em;
   font-family: "Roboto", sans-serif;
-  background: -webkit-linear-gradient(#eee, rgb(119, 22, 183));
+  background: -webkit-linear-gradient(#eee, rgb(178, 183, 22));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-

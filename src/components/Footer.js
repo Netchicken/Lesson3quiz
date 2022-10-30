@@ -11,7 +11,7 @@ const Footer = ({ props }) => {
           <div className='appheadercitytext'>
             <a
               href={"https://www.google.com/search?q=" + props.A}
-              target='_blank'
+              target='_blank' rel="noreferrer"
             >
               Google {props.A ? props.A : "No place"} (debugging)
             </a>
