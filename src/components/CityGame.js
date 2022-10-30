@@ -18,12 +18,12 @@ const CityGame = () => {
   });
 
   const [answersData, setAnswersData] = useState([]);
-  let selectedCity;
+  let answer;
 
   const [number, setNumber] = useState(0); //random number
   const [citiesCorrect, setCitiesCorrect] = useState([]);
   const [citiesWrong, setCitiesWrong] = useState([]);
-  const [selectCityData, setSelectCityData] = useState();
+  //const [selectCityData, setSelectCityData] = useState();
   //const [allAnswers, setAllAnswers] = useState();
   const allData = quizData;
   const [answerData, setAnswerData] = useState();
@@ -66,36 +66,29 @@ const CityGame = () => {
   }
 
   const CheckForWinnerLoser = () => {
-    console.log("CheckForWinnerLoser gameData.CapitalName", gameData.Placename);
+    console.log("CheckForWinnerLoser gameData.CapitalName", gameData.Q);
     //setToggleTextIsHidden("true"); //hide the text
 
-    console.log("CheckForWinnerLoser selectedCity", selectedCity);
+    console.log("CheckForWinnerLoser selectedCity", answer);
 
-    if (selectedCity != null && gameData.Placename !== null) {
-      if (selectedCity === gameData.Placename) {
-        alertItemName("Yes! You win! The place is " + selectedCity);
-        // pass in the citiescorrect state, spread it,  and pass both to setCitiesCorrect
+    if (answer != null && gameData.A !== null) {
+      if (answer === gameData.A) {
+        alertItemName("Yes! You win! The answer is " + answer);
 
         let url = (
-          <a
-            href={"https://www.google.com/search?q=new+zealand+" + selectedCity}
-          >
-            Visit
-          </a>
+          <a href={"https://www.google.com/search?q=+" + answer}>Google It!</a>
         );
 
         setCitiesCorrect((citiesCorrect) => [
           ...citiesCorrect,
-          selectedCity + " is " + gameData.Components,
+          answer + " is " + gameData.Q,
         ]);
       } else {
-        alertItemName(
-          "Sorry. The place is not " + selectedCity + ". Try again"
-        );
+        alertItemName("Sorry. The answer is not " + answer + ". Try again");
         // pass in the citiesWrong state, spread it,  and pass both to setCitiesWrong
         setCitiesWrong((citiesWrong) => [
           ...citiesWrong,
-          selectedCity + " is not " + gameData.Meaning,
+          answer + " is not " + gameData.Q,
         ]);
       }
     }
@@ -103,7 +96,7 @@ const CityGame = () => {
 
   const handleCityChange = (e) => {
     console.log(" handleChange city Selected!!", e.value);
-    selectedCity = e.value;
+    answer = e.value;
     CheckForWinnerLoser();
   };
   //for the dropdown select https://blog.logrocket.com/getting-started-with-react-select/
@@ -118,9 +111,7 @@ const CityGame = () => {
   };
 
   const newplaceholder = () => {
-    return selectedCity
-      ? "Select an Answer " + selectedCity
-      : "Select an Answer";
+    return answer ? "Select an Answer " + answer : "Select an Answer";
   };
 
   return (
@@ -140,7 +131,7 @@ const CityGame = () => {
             styles={selectCustomStyles}
             options={answerData}
             className='selectDropDownStyle'
-            value={selectedCity}
+            value={answer}
             onChange={handleCityChange}
             placeholder={newplaceholder()} //'Select the place'
             controlShouldRenderValue={true}
