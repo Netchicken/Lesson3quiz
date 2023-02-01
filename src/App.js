@@ -1,4 +1,4 @@
-import cityGame from "./components/CityGame";
+import Game from "./components/Game";
 
 import share from "./components/Share";
 import React from "react";
@@ -11,7 +11,7 @@ function App() {
   return (
     <div className='container-fluid'>
       <Switch>
-        <Route exact path='/' component={cityGame} />
+        <Route exact path='/' component={Game} />
         <Route component={share} />
       </Switch>
     </div>

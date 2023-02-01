@@ -7,6 +7,7 @@ import Footer from "./Footer"; //shows country info
 import Results from "./ResultsPage"; //shows the results
 import { GetRandomNumber, alertItemName } from "../Operations/AllOperations";
 import { quizData } from "../Assets/quiz";
+import CheckForWinnerLoser from "../Operations/CheckForWinnerLoser";
 
 const Game = () => {
   const [gameData, setGameData] = useState({
@@ -15,14 +16,11 @@ const Game = () => {
     A: "Start",
   });
 
-  //const [answersData, setAnswersData] = useState([]);
-
-  const [number, setNumber] = useState(0); //random number
   const [answerCorrect, setAnswerCorrect] = useState([]);
   const [answerWrong, setAnswerWrong] = useState([]);
   const [answerData, setAnswerData] = useState();
   const allData = quizData;
-  let answer;
+  let YourAnswer;
 
   const onClickHandlerNewGame = () => {
     //  console.log("onClickHandlerNewGame", "triggered");
@@ -46,51 +44,39 @@ const Game = () => {
     CreateSelectData();
 
     console.log("LoadGamedata length", length);
-
     console.log("LoadGamedata answerData", answerData);
     let rand = GetRandomNumber(length);
-    setNumber(rand);
     setGameData({ Q: allData[rand].Q, A: allData[rand].A });
-    // allData.map(() => {
-    //   var selecteditem = allData[number]; //get the data at that point
-    //   setGameData({
-    //     Q: selecteditem.Q,
-    //     A: selecteditem.A,
-    //   });
-    //   console.log("Selected item Q A", selecteditem.Q + " " + selecteditem.A);
-    // });
   }
 
-  const CheckForWinnerLoser = () => {
-    console.log("CheckForWinnerLoser gameData.CapitalName", gameData.Q);
-    //setToggleTextIsHidden("true"); //hide the text
+  const handleAnswerChange = (e) => {
+    console.log(" handleChange city Selected!!", e.value);
+    YourAnswer = e.value;
 
-    console.log("CheckForWinnerLoser selectedanswer", answer);
+    let result = CheckForWinnerLoser({
+      yourAnswer: YourAnswer,
+      gameAnswer: gameData,
+    });
+    
+    if (result === "Winner") {
+      alertItemName("Yes! You win! The answer is " + YourAnswer);
 
-    if (answer != null && gameData.A !== null) {
-      if (answer === gameData.A) {
-        alertItemName("Yes! You win! The answer is " + answer);
+      setAnswerCorrect((answersCorrect) => [
+        ...answersCorrect,
+        YourAnswer + " is " + gameData.Q,
+      ]);
+    }
 
-        setAnswerCorrect((answersCorrect) => [
-          ...answersCorrect,
-          answer + " is " + gameData.Q,
-        ]);
-      } else {
-        alertItemName("Sorry. The answer is not " + answer + ". Try again");
-        // pass inanswer state, spread it,  and pass both to setCitiesWrong
-        setAnswerWrong((answerWrong) => [
-          ...answerWrong,
-          answer + " is not " + gameData.Q,
-        ]);
-      }
+    if (result === "Loser") {
+      alertItemName("Sorry. The answer is not " + YourAnswer + ". Try again");
+      // pass inanswer state, spread it,  and pass both to setCitiesWrong
+      setAnswerWrong((answerWrong) => [
+        ...answerWrong,
+        YourAnswer + " is not " + gameData.Q,
+      ]);
     }
   };
 
-  const handleCityChange = (e) => {
-    console.log(" handleChange city Selected!!", e.value);
-    answer = e.value;
-    CheckForWinnerLoser();
-  };
   //for the dropdown select https://blog.logrocket.com/getting-started-with-react-select/
   const selectCustomStyles = {
     option: (provided, state) => ({
@@ -103,7 +89,7 @@ const Game = () => {
   };
 
   const newplaceholder = () => {
-    return answer ? "Select an Answer " + answer : "Select an Answer";
+    return YourAnswer ? "Select an Answer " + YourAnswer : "Select an Answer";
   };
 
   return (
@@ -123,8 +109,8 @@ const Game = () => {
             styles={selectCustomStyles}
             options={answerData}
             className='selectDropDownStyle'
-            value={answer}
-            onChange={handleCityChange}
+            value={YourAnswer}
+            onChange={handleAnswerChange}
             placeholder={newplaceholder()} //'Select the place'
             controlShouldRenderValue={true}
           />
