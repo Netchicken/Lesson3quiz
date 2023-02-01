@@ -9,18 +9,18 @@ import Header from "../components/Header";
 //In modern React, developers will not get around Jest for testing, because its the most popular testing framework out there for JavaScript applications. Apart from being a test runner -- which you can run with npm run test once you have set up your package.json with a test script -- Jest offers you the following functions for your tests:
 
 //The describe-block is the test suite, the it-block (which also can be named test instead of it) is the test case.
-describe("true is truthy and false is falsy", () => {
-  //test suite title
-  it("true is truthy", () => {
-    //test title
-    expect(true).toBe(true); //assertion
-  });
+// describe("true is truthy and false is falsy", () => {
+//   //test suite title
+//   it("true is truthy", () => {
+//     //test title
+//     expect(true).toBe(true); //assertion
+//   });
 
-  it("false is falsy", () => {
-    //test title
-    expect(false).toBe(false); // assertion
-  });
-});
+//   it("false is falsy", () => {
+//     //test title
+//     expect(false).toBe(false); // assertion
+//   });
+// });
 
 //this is the test suite and inside you have your tests. The test suite is a collection of tests that are related to each other. In this case, the test suite is called "Header" and it contains two tests. The first test is called "renders Header component" and the second test is called "renders Header component with props".
 describe("Test the Footer Component", () => {
@@ -80,7 +80,7 @@ test("CheckForWinnerLoser returns Loser for different inputs", () => {
   ).toBe("Loser");
 });
 
-test("CheckForWinnerLoser returns Loser for different inputs", () => {
+test("CheckForWinnerLoser returns Winner for the same inputs", () => {
   const gameData = {
     //mock data to pass through
     Q: "Start",
