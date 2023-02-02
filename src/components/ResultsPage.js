@@ -7,7 +7,11 @@ const Results = (props) => {
             <div className='appheadermeaningtext'>Correct</div>
             {props.answerCorrect.reverse().map((item) => {
               return (
-                <div className='cardBody' key={item}>
+                <div
+                  className='cardBody'
+                  key={item}
+                  data-testid='answerCorrect'
+                >
                   {item}
                 </div>
               );
@@ -17,7 +21,11 @@ const Results = (props) => {
             <div className='appheadermeaningtext'>Incorrect</div>
             {props.answerWrong.reverse().map((item) => {
               return (
-                <div key={item} className='cardBody'>
+                <div
+                  key={item}
+                  className='cardBody'
+                  data-testid='answerIncorrect'
+                >
                   {item}
                 </div>
               );

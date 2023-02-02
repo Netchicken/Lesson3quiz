@@ -3,6 +3,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Game from "../components/Game";
+import Results from "../components/ResultsPage";
 
 //Good video https://www.youtube.com/watch?v=v6LK5alOofs
 //https://www.robinwieruch.de/react-testing-library/
@@ -58,7 +60,7 @@ describe("Test the Header Component", () => {
     const HeadingText = screen.getByText(/The Kiwi quiz/i); //get the text you want to test
     expect(HeadingText).toBeInTheDocument(); //assertion
   });
-  it("Is Q = Start?", () => {
+  it("Is the question displaying from the gameData?", () => {
     //test title
     render(<Header props={gameData} />); //render the component
     const HeadingText = screen.getByText(/Start/i); //get the text you want to test
@@ -66,7 +68,46 @@ describe("Test the Header Component", () => {
   });
 });
 
-//functional test
+//https://www.youtube.com/watch?v=Qf2k9zt3S_A
+describe("Test answerCorrect and answerWrong columns", () => {
+  //test suite title
+  const fakeAnswerCorrect = ["correct", "correct2", "correct3"];
+  const fakeAnswerWrong = ["incorrect", "incorrect2", "incorrect3"];
+  //<div className='cardBody' key={item} data-testid='answerCorrect'> added data-testid to the div
+  // <div key={item}  className='cardBody' data-testid='answerIncorrect'>
+
+  it("Is answerCorrect displaying?", () => {
+    const { getAllByTestId } = render(
+      <Results
+        answerCorrect={fakeAnswerCorrect}
+        answerWrong={fakeAnswerWrong}
+      />
+    ); //render the component
+    const correctAnswers = screen
+      .getAllByTestId("answerCorrect")
+      .map((div) => div.textContent); //get the content of the div with answercorrect in them
+
+    expect(correctAnswers).toEqual(fakeAnswerCorrect); //assertion
+  });
+
+  it("Is answerWrong displaying?", () => {
+    render(
+      <Results
+        answerCorrect={fakeAnswerCorrect}
+        answerWrong={fakeAnswerWrong}
+      />
+    ); //render the component
+    const inCorrectAnswers = screen
+      .getAllByTestId("answerIncorrect")
+      .map((div) => div.textContent); //get the content of the div with answercorrect in them
+
+    expect(inCorrectAnswers).toEqual(fakeAnswerWrong); //assertion
+  });
+});
+
+
+//===================================================================
+//functional tests
 
 test("CheckForWinnerLoser returns Loser for different inputs", () => {
   const gameData = {
@@ -80,7 +121,7 @@ test("CheckForWinnerLoser returns Loser for different inputs", () => {
   ).toBe("Loser");
 });
 
-test("CheckForWinnerLoser returns Winner for the same inputs", () => {
+test("CheckForWinnerLoser returns Winner for  same inputs", () => {
   const gameData = {
     //mock data to pass through
     Q: "Start",
